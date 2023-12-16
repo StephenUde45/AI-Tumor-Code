@@ -38,8 +38,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=('accuracy')
 # Sets epics to 1000 which makes the algorithm run the data that number of times
 model.fit(x_train, y_train, epochs=1000)
 # Here is the data but ran 1000 times becomming more accurate: 
-Epoch 1/1000
-15/15 [==============================] - 1s 3ms/step - loss: 0.5908 - accuracy: 0.6901
+Epoch 1/1000 15/15 [==============================] - 1s 3ms/step - loss: 0.5908 - accuracy: 0.6901
 # Comparing what the model thinks the model tests thinks it should be to what it actually is 
 # This determines the level of accuracy the AI can determine whethSer or not the tumor is cancerous or not
 # Achieved a 96 percent in determinationm
