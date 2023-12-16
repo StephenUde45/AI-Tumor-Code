@@ -12,33 +12,44 @@ diagnosis(1=malignant, 0=benign)	radius_mean	texture_mean	perimeter_mean	area_me
 0	11.76	21.6	74.72	427.9	0.08637	0.04966	0.01657	0.01115	0.1495	0.05888	0.4062	1.21	2.635	28.47	0.005857	0.009758	0.01168	0.007445	0.02406	0.001769	12.98	25.72	82.98	516.5	0.1085	0.08615	0.05523	0.03715	0.2433	0.06563
 0	13.64	16.34	87.21	571.8	0.07685	0.06059	0.01857	0.01723	0.1353	0.05953	0.1872	0.9234	1.449	14.55	0.004477	0.01177	0.01079	0.007956	0.01325	0.002551	14.67	23.19	96.08	656.7	0.1089	0.1582	0.105	0.08586	0.2346	0.08025
 0	11.94	18.24	75.71	437.6	0.08261	0.04751	0.01972	0.01349	0.1868	0.0611	0.2273	0.6329	1.52	17.47	0.00721	0.00838	0.01311	0.008	0.01996	0.002635	13.1	21.33	83.67	527.2	0.1144	0.08906	0.09203	0.06296	0.2785	0.07408
+
 # Imports the dataset above
 import pandas as pd
 dataset = pd.read_csv('cancer.csv')
+
 # Sets x equals everything except the diagnosis 
 x = dataset.drop(columns=["diagnosis(1=m, 0=b)"])
+
 # Sets y equals to the diagnosis 
 y = dataset["diagnosis(1=m, 0=b)"]
-# Sets the data set into a testing set and a training set to minigate overfitting(The AI does well with given data but not too well with receiving new data)
+
+# Sets the data set into a testing set and a training set to minigate overfitting(The AI does well with given data but not too well with receiving new data
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
 # Using Keras(Building a neuro network) 
 import tensorflow as tf
 model = tf.keras.models.Sequential()
+
 # Adding layers to the module(referencing neural network)
 # Output would be 256 neurons
 # Signmoid is used to set all values within it(reduces model complexity and makes the model more accurate)
+
 model.add(tf.keras.layers.Dense(256, input_shape=x_train.shape[1:], activation='sigmoid'))
 model.add(tf.keras.layers.Dense(256, activation='sigmoid'))
 model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
+
 # Using the optimizer adam(finetunes the neurons and weights of the algorithm to fit the data)
 # Using binary classsification so I used binary_crossentropy 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=('accuracy'))
+
 # Fits the x_train to the y_train 
 # Sets epics to 1000 which makes the algorithm run the data that number of times
 model.fit(x_train, y_train, epochs=1000)
+
 # Here is the data but ran 1000 times becomming more accurate: 
 Epoch 1/1000 15/15 [==============================] - 1s 3ms/step - loss: 0.5908 - accuracy: 0.6901
+
 # Comparing what the model thinks the model tests thinks it should be to what it actually is 
 # This determines the level of accuracy the AI can determine whethSer or not the tumor is cancerous or not
 # Achieved a 96 percent in determinationm
