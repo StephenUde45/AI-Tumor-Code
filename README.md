@@ -23,7 +23,7 @@ x = dataset.drop(columns=["diagnosis(1=m, 0=b)"])
 # Sets y equals to the diagnosis 
 y = dataset["diagnosis(1=m, 0=b)"]
 
-# Sets the data set into a testing set and a training set to minigate overfitting(The AI does well with given data but not too well with receiving new data
+# Sets the data set into a testing set and a training set to minigate overfitting(The AI does well with given data but not too well with receiving new data)
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
